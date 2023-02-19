@@ -1,8 +1,8 @@
 import React from 'react'
-import Button from '@mui/material/Button';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import IconButton from '@mui/material/IconButton';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import Badge from '@mui/material/Badge';
+import { NavLink } from 'react-router-dom';
 
 
 const lightTheme = createTheme({
@@ -16,11 +16,12 @@ const lightTheme = createTheme({
 
 const CartWidget = () => {
   return (
-    <ThemeProvider theme={lightTheme}>
-      <IconButton color="primary" aria-label="add to shopping cart">
+    <ThemeProvider theme={lightTheme}> 
+      <NavLink to={'/cart'}>
+        <Badge badgeContent={4} color="primary">
           <AddShoppingCartIcon />
-          <p>5</p>
-      </IconButton> 
+        </Badge>
+      </NavLink>
     </ThemeProvider>
   )
 }

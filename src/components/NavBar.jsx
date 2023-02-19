@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { NavLink } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,7 +14,7 @@ import PetsIcon from '@mui/icons-material/Pets';
 import CartWidget from './CartWidget';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
-const pages = ['Perros', 'Gatos', 'Ropa', 'Comida'];
+const pages = ['perros', 'gatos', 'ropa'];
 
 function NavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -39,14 +40,16 @@ function NavBar() {
     <Container>
       <ThemeProvider theme={darkTheme}>
         <AppBar position="fixed">
-          <Container maxWidth="xl">
-            <Toolbar disableGutters>
+          <Container>
+            <Toolbar>
               <PetsIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+              <NavLink to={"/"} >
+              
               <Typography
                 variant="h6"
                 noWrap
                 component="a"
-                href="/"
+                
                 sx={{
                   mr: 2,
                   display: { xs: 'none', md: 'flex' },
@@ -59,6 +62,7 @@ function NavBar() {
               >
                 ASLANPETSTORE
               </Typography>
+              </NavLink >
 
               <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                 <IconButton
@@ -89,6 +93,12 @@ function NavBar() {
                     display: { xs: 'block', md: 'none' },
                   }}
                 >
+                  <NavLink to="/categorias">
+                    
+                      <MenuItem key="categorias" onClick={handleCloseNavMenu}>
+                        <Typography textAlign="center">Categorias</Typography>
+                      </MenuItem>
+                  </NavLink>
                   {pages.map((page) => (
                     <MenuItem key={page} onClick={handleCloseNavMenu}>
                       <Typography textAlign="center">{page}</Typography>
@@ -97,11 +107,11 @@ function NavBar() {
                 </Menu>
               </Box>
               <PetsIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+              <NavLink to={"/"}>
               <Typography
                 variant="h5"
                 noWrap
                 component="a"
-                href=""
                 sx={{
                   mr: 2,
                   display: { xs: 'flex', md: 'none' },
@@ -115,15 +125,29 @@ function NavBar() {
               >
                 ASLANPETSTORE
               </Typography>
+              </NavLink>
               <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                <NavLink to='/categorias'>
+                
+                    <Button
+                      key="categorias"
+                      onClick={handleCloseNavMenu}
+                      sx={{ my: 2, color: 'white', display: 'block' }}
+                    >
+                      Categorias
+                    </Button>
+
+                </NavLink>
                 {pages.map((page) => (
-                  <Button
-                    key={page}
-                    onClick={handleCloseNavMenu}
-                    sx={{ my: 2, color: 'white', display: 'block' }}
-                  >
-                    {page}
-                  </Button>
+                  <NavLink to={`/categorias/${page}`} key={page}>
+                    <Button
+                      key={page}
+                      onClick={handleCloseNavMenu}
+                      sx={{ my: 2, color: 'white', display: 'block' }}
+                    >
+                      {page}
+                    </Button>
+                  </NavLink>
                 ))}
               </Box>
               <Box sx={{ flexGrow: 0, }} mt={2} mb={2} width={100}>
@@ -132,6 +156,7 @@ function NavBar() {
             </Toolbar>
           </Container>
         </AppBar>
+        <Toolbar />
       </ThemeProvider>
     </Container>
   );

@@ -1,0 +1,114 @@
+[
+    {
+        "id": 1,
+        "title": "Dogourmet",
+        "description": "ining Lorem Ipsum passages,and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        "price": 10.55,
+        "pictureUrl": "../public/images/dogourmet.jpg",
+        "categoria": "perros"
+    },
+    {
+        "id": 2,
+        "title": "NutraNugget",
+        "description": "ining Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        "price": 35.55,
+        "pictureUrl": "../public/images/nutranugget.jpg",
+        "categoria": "perros"
+    },
+    {
+        "id": 3,
+        "title": "DogShow",
+        "description": "ining Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        "price": 50.55,
+        "pictureUrl": "../public/images/dogchow.jpg",
+        "categoria": "perros"
+    },
+    {
+        "id": 4,
+        "title": "Monello",
+        "description": "ining Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        "price": 5.55,
+        "pictureUrl": "../public/images/monello.jpg",
+        "categoria": "perros"
+    },
+    {
+        "id": 5,
+        "title": "CatChow",
+        "description": "ining Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        "price": 35.55,
+        "pictureUrl": "../public/images/catchow.jpg",
+        "categoria": "gatos"
+    },
+    {
+        "id": 6,
+        "title": "Chunky",
+        "description": "ining Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        "price": 50.55,
+        "pictureUrl": "../public/images/chunky.jpg",
+        "categoria": "perros"
+    },
+    {
+        "id": 7,
+        "title": "Max",
+        "description": "ining Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        "price": 5.55,
+        "pictureUrl": "../public/images/max.png",
+        "categoria": "perros"
+    },
+    {
+        "id": 8,
+        "title": "Gatsy",
+        "description": "ining Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        "price": 35.55,
+        "pictureUrl": "../public/images/gatsy.jpg",
+        "categoria": "gatos"
+    },
+    {
+        "id": 9,
+        "title": "Ropa Akatsuki Perro",
+        "description": "ining Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        "price": 5.55,
+        "pictureUrl": "../public/images/akatsukiperros.jpg",
+        "categoria": "ropa"
+    },
+    {
+        "id": 10,
+        "title": "Ropa Perros",
+        "description": "ining Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        "price": 35.55,
+        "pictureUrl": "../public/images/ropaperros.jpg",
+        "categoria": "ropa"
+    },
+    {
+        "id": 11,
+        "title": "Ropa Gatos",
+        "description": "ining Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        "price": 35.55,
+        "pictureUrl": "../public/images/ropagato.jpg",
+        "categoria": "ropa"
+    },
+    {
+        "id": 12,
+        "title": "Conjunto Akatsuki Gato",
+        "description": "ining Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        "price": 35.55,
+        "pictureUrl": "../public/images/ropagato2.jpg",
+        "categoria": "ropa"
+    },
+    {
+        "id": 13,
+        "title": "Dali",
+        "description": "ining Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        "price": 35.55,
+        "pictureUrl": "../public/images/dali.jpg",
+        "categoria": "gatos"
+    },
+    {
+        "id": 14,
+        "title": "Brekies",
+        "description": "ining Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        "price": 35.55,
+        "pictureUrl": "../public/images/brekies.jpg",
+        "categoria": "gatos"
+    }
+]
