@@ -11,11 +11,13 @@ const ItemDetailContainer = () => {
     let [count, setCount] = useState(0)
     const {id} = useParams();
 
+    //retrieve items from the json file
     const getItem = () => {
         return new Promise((resolve, reject)=>{
             if(Data.length === 0){
                 reject(new Error("No hay items"))
             }
+            //settimeout to simulate an API response time
             setTimeout(()=>{
                 setItem(item = Data[id - 1])
                 console.log(id)
@@ -24,14 +26,14 @@ const ItemDetailContainer = () => {
         })
     }
 
-
+    //use efect to wait asynchronously for the 2second wait time that the getItem() function will take to show a return
     useEffect(()=>{
         const fetchItems = async() => {
             const fetchedItems = await getItem();
         }
-
+        //fetch items and show them
         fetchItems()
-
+        //show error if one
         .catch(console.error)
     }, [])
 

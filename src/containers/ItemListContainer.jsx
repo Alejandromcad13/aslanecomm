@@ -37,6 +37,7 @@ const ItemListContainer = () => {
 
     fetchJson();
 
+    //conditional to render the page depending on where we have a useParam or not, which means we have a category or not
     if(categorias){
       return (
         <>
