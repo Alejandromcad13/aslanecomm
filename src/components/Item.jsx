@@ -22,7 +22,7 @@ const darkTheme = createTheme({
 });
 
 
-const Item = ({id, title, description, price, pictureUrl}) => {
+const Item = ({id, title, description, price, pictureUrl, stock}) => {
   return (
     <>
       <ThemeProvider theme={darkTheme}>
@@ -43,7 +43,7 @@ const Item = ({id, title, description, price, pictureUrl}) => {
             <Stack spacing={1} alignItems="center">
               <Stack direction="row" alignItems="center" spacing={1}>
                  <Chip label={"Price: " + price} variant="outlined"></Chip>
-                 <Chip label={"Id: " + id} color="primary" variant='outlined'></Chip>
+                 <Chip label={"stock: " + stock} color="primary" variant='outlined'></Chip>
               </Stack>
             </Stack>
           </CardContent>

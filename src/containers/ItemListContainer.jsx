@@ -1,41 +1,41 @@
 import { Container } from '@mui/material'
 import React from 'react'
 import ItemList from '../components/ItemList'
-import productsJson from '../items.json'
 import { useParams } from 'react-router-dom';
-
+import { useEffect, useContext, useState } from 'react';
+import {collection, getFirestore, getDocs} from 'firebase/firestore';
 
 
 const ItemListContainer = () => {
-
+    //recibo el parametro del URL si hay
     const {categorias} = useParams();
+    //empty list of products
+    const [products, setProducts] = useState([]);
 
     if(categorias){
       console.log(categorias)
     }
 
-    //function to get the data of the json file
-    let json = productsJson 
-    const getData = () => {
-      return new Promise((resolve, reject)=>{
-        if(json.length === 0) {
-          reject(new Error("No hay datos"))
-        }
-        setTimeout(() => {
-          resolve(json)
-        }, 2000)
-      })
-    }
-    //async function to listen for when the 2 second time out function is run
-    async function fetchJson(){
-      try {
-        const datosFetched = await getData();
-      }catch(err){
-        console.log(err)
-      }
-    }
+    //use efect to get the collection from firestore
+    useEffect(()=>{
+      //retrieve the database from firestore and store it on a variable 
+      const db = getFirestore();
 
-    fetchJson();
+      const productCollection = collection(db, 'productos');
+      //promise to retrieve the collection. 
+      getDocs(productCollection).then((snapshot) => {
+        //with the results we map the list and populate the empty product List
+        if(snapshot.size === 0){
+          console.log("No hay productos!")
+        }
+        setProducts(snapshot.docs.map((prod)=>({
+            id: prod.id,
+            ...prod.data()
+          })))
+          
+        }).catch(console.error);   
+  }, [])
+
 
     //conditional to render the page depending on where we have a useParam or not, which means we have a category or not
     if(categorias){
@@ -45,8 +45,8 @@ const ItemListContainer = () => {
              marginTop:6
            }}>
           {
-            json.filter( filter => filter.categoria.includes(`${categorias.toString()}`)).map(({id, title, description,price, pictureUrl}) => (
-              <ItemList key={id} id={id} title={title} description={description} price={price} pictureUrl={pictureUrl}/>
+            products.filter( filter => filter.categoria.includes(`${categorias.toString()}`)).map(({id, title, description,price, pictureUrl, stock}) => (
+              <ItemList key={id} id={id} title={title} description={description} price={price} pictureUrl={pictureUrl} stock={stock}/>
            ))
           }
          </Container>
@@ -59,9 +59,10 @@ const ItemListContainer = () => {
              marginTop:6
            }}>
           {
-            json.map(({id, title, description,price, pictureUrl}) => (
-              <ItemList key={id} id={id} title={title} description={description} price={price} pictureUrl={pictureUrl}/>
+            products.map(({id, title, description,price, pictureUrl, stock}) => (
+              <ItemList key={id} id={id} title={title} description={description} price={price} pictureUrl={pictureUrl} stock={stock}/>
             )) 
+
           }
          </Container>
       </>
@@ -70,3 +71,4 @@ const ItemListContainer = () => {
 }
 
 export default ItemListContainer
+

@@ -1,40 +1,31 @@
 import { useEffect, useState } from 'react'
-import Data from '../items.json'
 import ItemDetail from '../components/ItemDetail'
 import { Container } from '@mui/system'
 import Grid from '@mui/material/Grid';
 import { useParams } from 'react-router-dom';
+import { doc , getFirestore, getDoc} from 'firebase/firestore';
 
 const ItemDetailContainer = () => {
     //define item variable
     let [item, setItem] = useState({})
-    let [count, setCount] = useState(0)
     const {id} = useParams();
 
-    //retrieve items from the json file
-    const getItem = () => {
-        return new Promise((resolve, reject)=>{
-            if(Data.length === 0){
-                reject(new Error("No hay items"))
-            }
-            //settimeout to simulate an API response time
-            setTimeout(()=>{
-                setItem(item = Data[id - 1])
-                console.log(id)
-                resolve(item)
-            }, 500)
-        })
-    }
 
-    //use efect to wait asynchronously for the 2second wait time that the getItem() function will take to show a return
+    //use efect to wait for firestore return
     useEffect(()=>{
-        const fetchItems = async() => {
-            const fetchedItems = await getItem();
-        }
-        //fetch items and show them
-        fetchItems()
-        //show error if one
+        const db = getFirestore();
+        const productDoc = doc(db, 'productos', `${id}`);
+        getDoc(productDoc)
+        .then((snapshot) => {
+            if(snapshot.exists()){
+                setItem({
+                    id: snapshot.id,
+                    ...snapshot.data()
+                })
+            }
+        })
         .catch(console.error)
+       
     }, [])
 
   return (
@@ -49,6 +40,7 @@ const ItemDetailContainer = () => {
                 description={item.description} 
                 pictureUrl={item.pictureUrl} 
                 price={item.price}
+                stock={item.stock}
                 />
             </Grid>
             

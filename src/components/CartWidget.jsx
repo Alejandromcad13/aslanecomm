@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Badge from '@mui/material/Badge';
 import { NavLink } from 'react-router-dom';
-
+import { CartContext } from '../context/CartContext';
 
 const lightTheme = createTheme({
   palette: {
@@ -15,10 +15,13 @@ const lightTheme = createTheme({
 
 
 const CartWidget = () => {
+  
+  const {cart} = useContext(CartContext);
+
   return (
     <ThemeProvider theme={lightTheme}> 
       <NavLink to={'/cart'}>
-        <Badge badgeContent={4} color="primary">
+        <Badge badgeContent={cart.length} color="primary">
           <AddShoppingCartIcon />
         </Badge>
       </NavLink>
