@@ -89,6 +89,7 @@ const ShoppingCart = ({children}) => {
     const clear = () => {
         setCart([])
         setCartTotal(0)
+        sumQuantity(0)
     }
 
     //check if the cart has the item we are trying to add
@@ -102,7 +103,7 @@ const ShoppingCart = ({children}) => {
     }
 
     return (
-        <CartContext.Provider value={{cart, setCart, addItem, isInCart, removeItem, clear, cartItems, cartTotal, setCartTotal, clear, sumQuantity}}>
+        <CartContext.Provider value={{cart, setCart, addItem, isInCart, removeItem, cartItems, cartTotal, setCartTotal, clear, sumQuantity}}>
             {children}
         </CartContext.Provider>
     )
