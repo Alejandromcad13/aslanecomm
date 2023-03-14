@@ -150,7 +150,7 @@ function NavBar() {
                   </NavLink>
                 ))}
               </Box>
-              <Box sx={{ flexGrow: 0, }} mt={2} mb={2} width={100}>
+              <Box sx={{ flexGrow: 0 }} mt={2} mb={2} width={100}>
                 <CartWidget />
               </Box>
             </Toolbar>

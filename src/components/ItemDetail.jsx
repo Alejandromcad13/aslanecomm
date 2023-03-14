@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import { useContext, useState } from 'react'
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import CardContent from '@mui/material/CardContent';
@@ -27,14 +27,16 @@ const ItemDetail = ({id, title, description, price, pictureUrl, stock}) => {
 
   const [itemQuantity, setItemQuantity] = useState(1)
 
-  const {cart, addItem, removeItem} = useContext(CartContext);
+  const { addItem, maxItems} = useContext(CartContext);
 
+
+  //functions to add and remove the quantity counter when the user selects how much items they want to add
   const addQuantity = () => {
     if(itemQuantity < stock){
       setItemQuantity( itemQuantity + 1)
       
     }else{
-      console.log('item is out of stock!')
+      
       return true
     }
     return false
@@ -45,7 +47,6 @@ const ItemDetail = ({id, title, description, price, pictureUrl, stock}) => {
       setItemQuantity(itemQuantity - 1)
       
     }else{
-      console.log('You cannot add less than 1 item')
       return true
     }
     return false
@@ -81,10 +82,11 @@ const ItemDetail = ({id, title, description, price, pictureUrl, stock}) => {
                 </Stack>
               </CardContent>
               <Divider />
-                <Stack spacing={1} alignItems="center" p={2}>
-                  {itemQuantity === 0 || itemQuantity >= stock ?  <Stack sx={{ width: '100%' }} spacing={2}>
+                  <Stack spacing={1} alignItems="center" p={2}>
+                  {itemQuantity === 0 || itemQuantity >= stock || maxItems === true ?  <Stack sx={{ width: '100%' }} spacing={2}>
                     <Alert severity="info">No puedes agregar mas o menos de los items en stock</Alert>
                   </Stack> : ''}
+                  
                   <Stack direction="row" alignItems="center" spacing={1}>
                     <Button variant="outlined" size="medium" onClick={removeQuantity}> <RemoveIcon/>remover</Button>
                     <Chip label={"items: " + itemQuantity} color="primary"></Chip>

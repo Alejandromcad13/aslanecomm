@@ -1,15 +1,18 @@
-import { useState, createContext, useEffect } from "react";
+import { useState, createContext } from "react";
 
 export const CartContext = createContext(null);
 
 const ShoppingCart = ({children}) => {
    
-    //define emtpy cart, a counter of the elements inside the cart array and a counter for how much of a single item i added to the cart
+    //define empty cart, a counter of the elements inside the cart array and a counter for how much of a single item i added to the cart
     const [cart, setCart] = useState([]);
-    const [cartItems , setCartItems] = useState(cart.length);
+    const [cartItems , setCartItems] = useState(0);
     const [cartTotal, setCartTotal] = useState(0)
     const [quantityCounter, setQuantityCounter] = useState(0);
 
+
+    //function to sum the total of the order by mapping through the array then creating a 
+    //new array with the amounts and then reducing it to get a single value
     const sumTotal = (cart) => {
         let cartAmounts = [];
         cart.map((total)=> {
@@ -21,19 +24,23 @@ const ShoppingCart = ({children}) => {
           );
         setCartTotal(sumWithInitial)
     }
+    //function to sum the total of the order by mapping through the array then creating a 
+    //new array with the amounts and then reducing it to get a single value
+    const sumQuantity = (cart) => {
+        let cartQuantity = [];
+        cart.map((total)=> {
+            cartQuantity.push(total.quantity)
+        })
+        const sumWithInitial = cartQuantity.reduce(
+            (accumulator, currentValue) => accumulator + currentValue,
+            0
+          );
+        setCartItems(sumWithInitial)
+    }
 
-    useEffect(() => {
-        if (cartTotal === 0) {
-            console.log('total is 0');
-          } else {
-            console.log('total is: ' + cartTotal);
-          }      
-      }, [cartTotal])
-
+    //Function to add the item to the cart. 
     const addItem = (item, quantity, itemId, stock) => {
         setCartTotal(0)
-        //filters the cart list getting the cart item that matches the ID, and gives me it's quantity
-        const cartItem = cart.filter(item => item.id === itemId);
         //if the item is not already in the cart. 
         if(!isInCart(itemId)){
             //add item provided on the parameter to the cart list
@@ -41,44 +48,52 @@ const ShoppingCart = ({children}) => {
            
             //changes the number of items in the cart and uses the amount of elements on the array
             setCartItems(cart.length)
-            setQuantityCounter(quantity + 1)
+            setQuantityCounter(quantity + quantity)
             sumTotal(cart)
-            console.log(cart, 'Added items', 'cantidad de items en el carro: ' + cart.length + 'total: ' + cartTotal)
+            sumQuantity(cart)
+            
         }else{
 
             //if the filtered item's quantity less than the stock we update the quantity of the item to be the same as the quantityCounter
             if(quantityCounter <= stock){
+                setCartTotal(0)
                 //we retrieve the filtered item on the cart list and add it's quantity to the overall quantity counter
                 setQuantityCounter(quantityCounter + quantity)
                 //if the quantity counter for this item is more less than the stock, we update the quantity of the element in the array
-                console.log('cantidad counter: ' + quantityCounter)
                 //get index
                 const cartIndex = cart.findIndex((obj => obj.id === itemId));
                 //with the index, locate the quantity parameter and change it
                 cart[cartIndex].quantity = quantityCounter;
                 sumTotal(cart)
-                console.log(cart, 'item is alredy on the cart', 'cantidad de items en el carro: ' + cart.length + ' total: ' + cartTotal)
-
+                sumQuantity(cart)
+                
             }else{
-                console.log('already added items in stock')
-                console.log(cart, 'cantidad counter: ' + quantityCounter) 
+                alert('You already added the max items in stock!')
+                sumTotal(cart)
+                sumQuantity(cart)
             }
         }
         
     }
 
+    //Function to remove items from the cart it filters the array by items no having the same if and returns a new array with the contents
     const removeItem = (itemId) => {
+        setCartTotal(0)
         const newCart = cart.filter(item => item.id !== itemId)
         setCart(newCart)
-        console.log('removed items')
+        sumTotal(newCart)
+        sumQuantity(newCart)
         
     }
-
+     //function to reset the cart
     const clear = () => {
-        
+        setCart([])
+        setCartTotal(0)
     }
 
+    //check if the cart has the item we are trying to add
     const isInCart = (itemId) => {
+
         const newCart = cart.filter(item => item.id === itemId)
         if(newCart.length === 0){
             return false
@@ -87,7 +102,7 @@ const ShoppingCart = ({children}) => {
     }
 
     return (
-        <CartContext.Provider value={{cart, setCart, addItem, isInCart, removeItem, clear, cartItems, cartTotal}}>
+        <CartContext.Provider value={{cart, setCart, addItem, isInCart, removeItem, clear, cartItems, cartTotal, setCartTotal, clear, sumQuantity}}>
             {children}
         </CartContext.Provider>
     )

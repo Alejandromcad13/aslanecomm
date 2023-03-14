@@ -8,7 +8,7 @@ import CartOrder from './CartOrder';
 
 const Cart = () => {
 
-  const {cart, removeItem, cartTotal} = useContext(CartContext)
+  const {cart} = useContext(CartContext)
 
   if(cart.length !== 0){
     return (
@@ -23,7 +23,6 @@ const Cart = () => {
           }
           </List>
           <CartOrder />
-          <h2>Total: {cartTotal}</h2>
         </Container>
       </>
     )
@@ -35,7 +34,8 @@ const Cart = () => {
       <NavLink to={`/`}>
         <Button size="small" variant={'outlined'}>Buscar productos</Button>
       </NavLink>
-    </Container></>
+    </Container>
+    </>
   )
   }
 }

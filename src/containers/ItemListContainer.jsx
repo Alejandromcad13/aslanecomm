@@ -2,7 +2,7 @@ import { Container } from '@mui/material'
 import React from 'react'
 import ItemList from '../components/ItemList'
 import { useParams } from 'react-router-dom';
-import { useEffect, useContext, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {collection, getFirestore, getDocs} from 'firebase/firestore';
 
 
@@ -11,10 +11,6 @@ const ItemListContainer = () => {
     const {categorias} = useParams();
     //empty list of products
     const [products, setProducts] = useState([]);
-
-    if(categorias){
-      console.log(categorias)
-    }
 
     //use efect to get the collection from firestore
     useEffect(()=>{

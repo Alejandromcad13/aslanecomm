@@ -9,7 +9,7 @@ import Divider from '@mui/material/Divider';
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 
 const darkTheme = createTheme({
